@@ -11,6 +11,9 @@ git submodule update --init --recursive
 # Generate the configure script.
 ./autogen.sh
 
+mkdir protoc-artifacts/build/linux
+mkdir protoc-artifacts/target/linux
+
 # Use docker image to build linux artifacts.
 DOCKER_IMAGE_NAME=protobuf/protoc_$(sha1sum protoc-artifacts/Dockerfile | cut -f1 -d " ")
 docker pull $DOCKER_IMAGE_NAME
@@ -28,6 +31,10 @@ docker run -v $(pwd):/var/local/protobuf --rm $DOCKER_IMAGE_NAME \
   echo "Failed to build protoc for linux + x86_32."
   exit 1
 }
+
+ls -l protoc-artifacts
+ls -l protoc-artifacts/build
+ls -l protoc-artifacts/target
 
 # Cross-build for aarch64.
 sudo apt install -y g++-aarch64-linux-gnu
