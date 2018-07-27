@@ -29,8 +29,6 @@ docker run -v $(pwd):/var/local/protobuf --rm $DOCKER_IMAGE_NAME \
   exit 1
 }
 
-# Cross-build for some architectures.
-# TODO(xiaofeng): It currently fails with "machine `aarch64' not recognized"
-# error.
-# sudo apt install -y g++-aarch64-linux-gnu
-# protoc-artifacts/build-protoc.sh linux aarch_64 protoc
+# Cross-build for aarch64.
+sudo apt install -y g++-aarch64-linux-gnu
+protoc-artifacts/build-protoc.sh linux aarch_64 protoc
